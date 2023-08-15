@@ -23,8 +23,6 @@ export function persist() {
   saveData(get() || "");
 }
 
-// TODO: export handleBeforeUnload, rename to persistData()
-
 /**
  * Hook used to initialize persist local variable
  * Called this hook only in one place
