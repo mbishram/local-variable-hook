@@ -28,13 +28,17 @@ export function persist() {
  * Called this hook only in one place
  */
 export const usePersistLocalVariable = () => {
+  // ** Vars
+  const restoreData = () => {
+    set(returnData() || "");
+    removeData();
+  };
+
   // If client side, run the script.
   if (typeof window !== "undefined")
     // useLayoutEffect used to prevent XSS attacks.
     useLayoutEffect(() => {
-      // Restoring data
-      set(returnData() || "");
-      removeData();
+      restoreData();
 
       // Handle saving data on close/reload
       const handleBeforeUnload = () => {
@@ -42,9 +46,22 @@ export const usePersistLocalVariable = () => {
       };
       window.addEventListener("beforeunload", handleBeforeUnload);
 
+      // Handle saving data on opening new tab
+      const handleVisibilityChange = () => {
+        if (document.visibilityState === "visible") {
+          // On tab return, restore data
+          restoreData();
+        } else {
+          // When opening a new tab, save data
+          persist();
+        }
+      };
+      window.addEventListener("visibilitychange", handleVisibilityChange);
+
       return () => {
         // Handle event listener cleanup
         window.removeEventListener("beforeunload", handleBeforeUnload);
+        window.removeEventListener("visibilitychange", handleVisibilityChange);
 
         // Save data on when hook unload
         handleBeforeUnload();
