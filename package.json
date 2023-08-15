@@ -1,0 +1,29 @@
+{
+  "name": "persist-local-variable",
+  "version": "1.0.0",
+  "description": "Persist local variable with React hook",
+  "repository": "git@github.com:mbishram/persist-local-variable.git",
+  "author": "Muh. Bishram Y. A. A.",
+  "license": "MIT",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "scripts": {
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.2",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "prettier": "^3.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.1.6"
+  }
+}
