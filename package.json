@@ -8,17 +8,20 @@
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
+  "scripts": {
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
+  },
   "keywords": [
     "react",
     "local-variable",
     "persist-variable",
     "front-end"
   ],
-  "scripts": {
-    "build": "yarn build:esm && yarn build:cjs",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
-  },
+  "files": [
+    "/lib"
+  ],
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
